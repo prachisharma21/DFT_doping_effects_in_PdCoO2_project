@@ -5,43 +5,43 @@ import matplotlib.font_manager as font_manager
 
 
 # load data for band structure to calculate densities 
-dataFe = np.loadtxt("./bandstructure_unfolded-path-SC333-k444-Fe-ecut100.txt")
-dataPt = np.loadtxt("./bandstructure_unfolded-path-SC333-k444-Pt-ecut100.txt")
-dataAl = np.loadtxt("./bandstructure_unfolded-path-SC333-k444-Al-ecut100.txt")
-dataAg = np.loadtxt("./bandstructure_unfolded-path-SC333-k444-Ag-ecut100.txt")
+dataFe = np.loadtxt("./Unfolded_bandstructure_data/bandstructure_unfolded-path-SC333-k444-Fe-ecut100.txt")
+dataPt = np.loadtxt("./Unfolded_bandstructure_data/bandstructure_unfolded-path-SC333-k444-Pt-ecut100.txt")
+dataAl = np.loadtxt("./Unfolded_bandstructure_data/bandstructure_unfolded-path-SC333-k444-Al-ecut100.txt")
+dataAg = np.loadtxt("./Unfolded_bandstructure_data/bandstructure_unfolded-path-SC333-k444-Ag-ecut100.txt")
 
 # load data of DOS, partial DOS and projected DOS on each atom
 # For the Fe doping
-en_w_Fe, dos_w_Fe, idos_w_Fe = np.loadtxt('./data_DOS_FeSC333_k444_e100/PdCoO2_Fe_doping_dos.dat', unpack=True)
-energydos_w_Fe, edos_w_Fe, pdos_w_Fe =  np.loadtxt('./data_DOS_FeSC333_k444_e100/PdCoO2_Fe_doping_pdos.dat.pdos_tot',unpack=True)
-ePd_w_Fe, Pdedos_w_Fe = np.loadtxt('./data_DOS_FeSC333_k444_e100/Pd_PDOS.dat', unpack=True)
-eCo_w_Fe, Coedos_w_Fe = np.loadtxt('./data_DOS_FeSC333_k444_e100/Co_PDOS.dat', unpack=True)
-eO_w_Fe, Oedos_w_Fe = np.loadtxt('./data_DOS_FeSC333_k444_e100/O_PDOS.dat', unpack=True)
-edop_w_Fe, dopedos_w_Fe = np.loadtxt('./data_DOS_FeSC333_k444_e100/Fe_PDOS.dat', unpack=True)
+en_w_Fe, dos_w_Fe, idos_w_Fe = np.loadtxt('./DOS_data_4_dopants/data_DOS_FeSC333_k444_e100/PdCoO2_Fe_doping_dos.dat', unpack=True)
+energydos_w_Fe, edos_w_Fe, pdos_w_Fe =  np.loadtxt('./DOS_data_4_dopants/data_DOS_FeSC333_k444_e100/PdCoO2_Fe_doping_pdos.dat.pdos_tot',unpack=True)
+ePd_w_Fe, Pdedos_w_Fe = np.loadtxt('./DOS_data_4_dopants/data_DOS_FeSC333_k444_e100/Pd_PDOS.dat', unpack=True)
+eCo_w_Fe, Coedos_w_Fe = np.loadtxt('./DOS_data_4_dopants/data_DOS_FeSC333_k444_e100/Co_PDOS.dat', unpack=True)
+eO_w_Fe, Oedos_w_Fe = np.loadtxt('./DOS_data_4_dopants/data_DOS_FeSC333_k444_e100/O_PDOS.dat', unpack=True)
+edop_w_Fe, dopedos_w_Fe = np.loadtxt('./DOS_data_4_dopants/data_DOS_FeSC333_k444_e100/Fe_PDOS.dat', unpack=True)
 
 # For Pt doping
-en_w_Pt, dos_w_Pt, idos_w_Pt = np.loadtxt('./data_DOS_PtSC333_k444_e100/PdCoO2_Pt_doping_dos.dat', unpack=True)
-energydos_w_Pt, edos_w_Pt, pdos_w_Pt =  np.loadtxt('./data_DOS_PtSC333_k444_e100/PdCoO2_Pt_doping_pdos.dat.pdos_tot',unpack=True)
-ePd_w_Pt, Pdedos_w_Pt = np.loadtxt('./data_DOS_PtSC333_k444_e100/Pd_PDOS.dat', unpack=True)
-eCo_w_Pt, Coedos_w_Pt = np.loadtxt('./data_DOS_PtSC333_k444_e100/Co_PDOS.dat', unpack=True)
-eO_w_Pt, Oedos_w_Pt = np.loadtxt('./data_DOS_PtSC333_k444_e100/O_PDOS.dat', unpack=True)
-edop_w_Pt, dopedos_w_Pt = np.loadtxt('./data_DOS_PtSC333_k444_e100/Pt_PDOS.dat', unpack=True)
+en_w_Pt, dos_w_Pt, idos_w_Pt = np.loadtxt('./DOS_data_4_dopants/data_DOS_PtSC333_k444_e100/PdCoO2_Pt_doping_dos.dat', unpack=True)
+energydos_w_Pt, edos_w_Pt, pdos_w_Pt =  np.loadtxt('./DOS_data_4_dopants/data_DOS_PtSC333_k444_e100/PdCoO2_Pt_doping_pdos.dat.pdos_tot',unpack=True)
+ePd_w_Pt, Pdedos_w_Pt = np.loadtxt('./DOS_data_4_dopants/data_DOS_PtSC333_k444_e100/Pd_PDOS.dat', unpack=True)
+eCo_w_Pt, Coedos_w_Pt = np.loadtxt('./DOS_data_4_dopants/data_DOS_PtSC333_k444_e100/Co_PDOS.dat', unpack=True)
+eO_w_Pt, Oedos_w_Pt = np.loadtxt('./DOS_data_4_dopants/data_DOS_PtSC333_k444_e100/O_PDOS.dat', unpack=True)
+edop_w_Pt, dopedos_w_Pt = np.loadtxt('./DOS_data_4_dopants/data_DOS_PtSC333_k444_e100/Pt_PDOS.dat', unpack=True)
 
 # For Al doping
-en_w_Al, dos_w_Al, idos_w_Al = np.loadtxt('./data_DOS_AlSC333_k444_e100/PdCoO2_Al_doping_dos.dat', unpack=True)
-energydos_w_Al, edos_w_Al, pdos_w_Al =  np.loadtxt('./data_DOS_AlSC333_k444_e100/PdCoO2_Al_doping_pdos.dat.pdos_tot',unpack=True)
-ePd_w_Al, Pdedos_w_Al = np.loadtxt('./data_DOS_AlSC333_k444_e100/Pd_PDOS.dat',unpack=True)
-eCo_w_Al, Coedos_w_Al = np.loadtxt('./data_DOS_AlSC333_k444_e100/Co_PDOS.dat',unpack=True)
-eO_w_Al, Oedos_w_Al = np.loadtxt('./data_DOS_AlSC333_k444_e100/O_PDOS.dat',unpack=True)
-edop_w_Al, dopedos_w_Al = np.loadtxt('./data_DOS_AlSC333_k444_e100/Al_PDOS.dat',unpack=True)
+en_w_Al, dos_w_Al, idos_w_Al = np.loadtxt('./DOS_data_4_dopants/data_DOS_AlSC333_k444_e100/PdCoO2_Al_doping_dos.dat', unpack=True)
+energydos_w_Al, edos_w_Al, pdos_w_Al =  np.loadtxt('./DOS_data_4_dopants/data_DOS_AlSC333_k444_e100/PdCoO2_Al_doping_pdos.dat.pdos_tot',unpack=True)
+ePd_w_Al, Pdedos_w_Al = np.loadtxt('./DOS_data_4_dopants/data_DOS_AlSC333_k444_e100/Pd_PDOS.dat',unpack=True)
+eCo_w_Al, Coedos_w_Al = np.loadtxt('./DOS_data_4_dopants/data_DOS_AlSC333_k444_e100/Co_PDOS.dat',unpack=True)
+eO_w_Al, Oedos_w_Al = np.loadtxt('./DOS_data_4_dopants/data_DOS_AlSC333_k444_e100/O_PDOS.dat',unpack=True)
+edop_w_Al, dopedos_w_Al = np.loadtxt('./DOS_data_4_dopants/data_DOS_AlSC333_k444_e100/Al_PDOS.dat',unpack=True)
 
 # For Ag doping
-en_w_Ag, dos_w_Ag, idos_w_Ag = np.loadtxt('./data_DOS_AgSC333_k444_e100/PdCoO2_Ag_doping_dos.dat', unpack=True)
-energydos_w_Ag, edos_w_Ag, pdos_w_Ag =  np.loadtxt('./data_DOS_AgSC333_k444_e100/PdCoO2_Ag_doping_pdos.dat.pdos_tot',unpack=True)
-ePd_w_Ag, Pdedos_w_Ag = np.loadtxt('./data_DOS_AgSC333_k444_e100/Pd_PDOS.dat', unpack=True)
-eCo_w_Ag, Coedos_w_Ag = np.loadtxt('./data_DOS_AgSC333_k444_e100/Co_PDOS.dat', unpack=True)
-eO_w_Ag, Oedos_w_Ag = np.loadtxt('./data_DOS_AgSC333_k444_e100/O_PDOS.dat', unpack=True)
-edop_w_Ag, dopedos_w_Ag = np.loadtxt('./data_DOS_AgSC333_k444_e100/Ag_PDOS.dat', unpack=True)
+en_w_Ag, dos_w_Ag, idos_w_Ag = np.loadtxt('./DOS_data_4_dopants/data_DOS_AgSC333_k444_e100/PdCoO2_Ag_doping_dos.dat', unpack=True)
+energydos_w_Ag, edos_w_Ag, pdos_w_Ag =  np.loadtxt('./DOS_data_4_dopants/data_DOS_AgSC333_k444_e100/PdCoO2_Ag_doping_pdos.dat.pdos_tot',unpack=True)
+ePd_w_Ag, Pdedos_w_Ag = np.loadtxt('./DOS_data_4_dopants/data_DOS_AgSC333_k444_e100/Pd_PDOS.dat', unpack=True)
+eCo_w_Ag, Coedos_w_Ag = np.loadtxt('./DOS_data_4_dopants/data_DOS_AgSC333_k444_e100/Co_PDOS.dat', unpack=True)
+eO_w_Ag, Oedos_w_Ag = np.loadtxt('./DOS_data_4_dopants/data_DOS_AgSC333_k444_e100/O_PDOS.dat', unpack=True)
+edop_w_Ag, dopedos_w_Ag = np.loadtxt('./DOS_data_4_dopants/data_DOS_AgSC333_k444_e100/Ag_PDOS.dat', unpack=True)
 
 
 # function defined to calculate the density from the band structure data 
@@ -134,8 +134,9 @@ axs[0,0].spines['right'].set_linewidth(1.5)
 axs[0,0].spines['bottom'].set_linewidth(1.5)
 axs[0,0].spines['left'].set_linewidth(1.5)
 fig.colorbar(pcm00,ax = axs[0,0],extend="neither",location='left')#,shrink=0.80)
-axs[0,0].tick_params(axis='both',direction='in',colors='w',length=4,width=1.5)
-axs[0,0].set_xticks(ticks= [0, 1.2581, 2.5162, 3.8095, 4.3284], labels=['$\Gamma$','L', 'F','$\Gamma$','T'])
+axs[0,0].tick_params(axis='both',direction='in',colors='w',length=4,width=1.5,labelsize=14)
+axs[0,0].set_xticks(ticks= [0, 1.2581, 2.5162, 3.8095, 4.3284], 
+                    labels=['$\Gamma$','L', 'F','$\Gamma$','T'],color='k',fontsize=14,fontname='Arial')
 axs[0,0].set_yticks(ticks= [-1,0,1],
                     labels=['-1','0', '1'],color='k',fontsize=14,fontname='Arial')
 axs[0,0].set_ylabel('$\epsilon - \epsilon_F$ (eV)',fontsize=14,fontname='Arial')
@@ -162,7 +163,7 @@ axs[0,1].set_xticks(ticks= [0,5,10],
 axs[0,1].tick_params(axis='x',direction='in',length=4,width=1.5,labelsize=14)
 axs[0,1].yaxis.set_visible(False)
 axs[0,1].axhline(0, linewidth=1, color='k', alpha=0.8, linestyle = '-')
-axs[0,1].legend(loc='upper right',fontsize="8",prop=font,frameon=False,facecolor='none',borderpad=0.2,labelspacing=0.3,handlelength=1,handletextpad=0.4,borderaxespad=0.2,bbox_to_anchor=(1,0.6))
+axs[0,1].legend(loc='upper right',fontsize="6",prop=font,frameon=False,facecolor='none',borderpad=0.2,labelspacing=0.3,handlelength=1,handletextpad=0.4,borderaxespad=0.2,bbox_to_anchor=(1,0.6))
 
 #############################################################################################################
 
@@ -203,7 +204,6 @@ axs[1,1].set_xticks(ticks= [0,5,10],
                     labels=['0','5', '10'],fontsize=14,fontname='Arial')
 axs[1,1].tick_params(axis='x',direction='in',length=4,width=1.5,labelsize=14)
 axs[1,1].yaxis.set_visible(False)
-axs[1,1].set_xlabel('DOS (states/eV atom)',fontsize=14,fontname='Arial')
 axs[1,1].axhline(0, linewidth=1, color='k', alpha=0.8, linestyle = '-')
 axs[1,1].legend(loc='upper right',fontsize="8",prop=font,frameon=False,facecolor='none',borderpad=0.2,labelspacing=0.3,handlelength=1,handletextpad=0.4,borderaxespad=0.2,bbox_to_anchor=(1,0.6))
 
@@ -218,7 +218,8 @@ axs[2,0].spines['bottom'].set_linewidth(1.5)
 axs[2,0].spines['left'].set_linewidth(1.5)
 fig.colorbar(pcm20,ax = axs[2,0],extend="neither",location='left')#,shrink=0.80)
 axs[2,0].tick_params(axis='both',direction='in',colors='w',length=4,width=1.5)
-axs[2,0].set_xticks(ticks= [0, 1.2581, 2.5162, 3.8095, 4.3284], labels=['$\Gamma$','L', 'F','$\Gamma$','T'])
+axs[2,0].set_xticks(ticks= [0, 1.2581, 2.5162, 3.8095, 4.3284], 
+                    labels=['$\Gamma$','L', 'F','$\Gamma$','T'],color='k',fontsize=14,fontname='Arial')
 axs[2,0].set_yticks(ticks= [-1,0,1],
                     labels=['-1','0', '1'],color='k',fontsize=14,fontname='Arial')
 axs[2,0].set_ylabel('$\epsilon - \epsilon_F$ (eV)',fontsize=14,fontname='Arial')
@@ -295,6 +296,6 @@ axs[3,1].legend(loc='upper right',fontsize="8",prop=font,frameon=False,facecolor
 #######################################################################################################
 
 # to adjust the spacing between the three plots both as width and height. 
-plt.subplots_adjust(wspace=0.04, hspace=0.15)
+plt.subplots_adjust(wspace=0.04, hspace=0.2)
 
-plt.savefig("Figure_DOS_w_Ag.png", dpi = 1200) #change to dpi 1200 for publishing.
+plt.savefig("Figure_4_paper.png", dpi = 1200) #change to dpi 1200 for publishing.
