@@ -48,12 +48,14 @@ eFeAg, FeedosAg = np.loadtxt('./data_DOS_AgSC333_k444_e100/Ag_PDOS.dat', unpack=
 
 def calc_density_1(data,Ebbd , dE, efermi, smearing):
     """ This function calculated the density from the bandstructure data
-    input paramaters: 
+    Input:
     data = loaded data file with bandstructure data
     Ebbd = The energy window within which we want the data to be plot
     dE = energy step size
     efermi = Fermi energy 
     smearing = smearing window
+    Output:
+    Density matrix and energy 
     """
     # upper bound of the energy
     Emin = -Ebbd + efermi 
@@ -122,7 +124,9 @@ font = font_manager.FontProperties(family='Arial',
 
 fig, axs = plt.subplots(4, 2,figsize=(10,8),gridspec_kw={'width_ratios':[1,0.3]} )
 
-# density pot for Fe doping
+##########################################################################################################
+
+# density plot for Fe doping
 pcm00 =axs[2, 0].pcolormesh(k1Fe,E1Fe,densityFe.T, cmap='magma', shading='auto', 
                             norm=colors.LogNorm(vmin= np.min(densityFe.T)+0.01, vmax= np.max(densityFe.T)))
 axs[2,0].spines['top'].set_linewidth(1.5)
@@ -161,19 +165,9 @@ axs[2,1].axhline(0, linewidth=1, color='k', alpha=0.8, linestyle = '-')
 # bbox_to_anchor is basically to move the legends around.
 axs[2,1].legend(loc='upper right',fontsize="8",prop=font,frameon=False,facecolor='none',borderpad=0.2,labelspacing=0.3,handlelength=1,handletextpad=0.4,borderaxespad=0.2,bbox_to_anchor=(1,0.6))
 
-# axs[0,1].set_xlim([0,22])  
-# axs[0,1].set_ylim([-1.5,1.5]) 
-# # to hide the y-axis 
-# axs[0,1].yaxis.set_visible(False)
-# # the DOS are not divided for each atoms--in case you want to keep it like.Third plot is with divided to give you an idea
-# # Need to check with Turan and Chris--dependeing upon that we can only put the label in the last plot and remove these 
-# #axs[0,1].set_xlabel('DOS(states/(eV)',fontsize=8,fontname='Ubuntu')
-# axs[0,1].xaxis.set_label_coords(1.3, -0.)
-# axs[0,1].axhline(0, linewidth=0.8, color='lime', alpha=0.8, linestyle = '--')
-# # bbox_to_anchor is basically to move the legends around--adjust it accordingly. 
-# axs[0,1].legend(loc='upper right',fontsize="6",bbox_to_anchor=(1.55,1))
+###############################################################################################################
 
-
+# density plot for Pt doping
 pcm10 = axs[0, 0].pcolormesh(k1Pt,E1Pt,densityPt.T, cmap='magma', shading='auto', 
                              norm=colors.LogNorm(vmin= np.min(densityPt.T)+0.01, vmax= np.max(densityPt.T)))
 axs[0,0].spines['top'].set_linewidth(1.5)
@@ -192,15 +186,7 @@ axs[0,0].axvline(1.2581, linewidth=1, color='w', alpha=0.8, linestyle = '-')
 axs[0,0].axvline(2.5162, linewidth=1, color='w', alpha=0.8, linestyle = '-')
 axs[0,0].axvline(3.8095, linewidth=1, color='w', alpha=0.8, linestyle = '-')
 
-# # in case you need to shrink the colorbar--remove the comment from the next line and adjust the parameter
-# fig.colorbar(pcm10,ax = axs[1,0],extend="both",location='left')#,shrink=0.80)
-# axs[1,0].xaxis.set_visible(False)
-# axs[1,0].set_xticks(ticks= [0, 1.2581, 2.5162, 3.8095, 4.3284])
-# axs[1,0].set_ylabel('$\epsilon - \epsilon_F$ (eV)',fontsize=10,fontname='Arial')
-# axs[1,0].yaxis.set_label_coords(-.05, .5)
-# axs[1,0].axhline(0, linewidth=0.8, color='lime', alpha=0.8, linestyle = '--')
-
-#dosFe/27,enFe
+# DOS for Pt doping
 axs[0,1].plot(dosPt/27,enPt-EfermiPt,linewidth = 1, color="k", label="Total")
 axs[0,1].plot(PdedosPt/26,ePdPt-EfermiPt,linewidth = 1, color="darkgoldenrod", label="Pd")
 axs[0,1].plot(CoedosPt/27,eCoPt-EfermiPt,linewidth = 1, color="royalblue",label= "Co")
@@ -216,22 +202,12 @@ axs[0,1].set_xticks(ticks= [0,5,10],
                     labels=['0','5','10'],fontsize=14,fontname='Arial')
 axs[0,1].tick_params(axis='x',direction='in',length=4,width=1.5,labelsize=14)
 axs[0,1].yaxis.set_visible(False)
-#axs[1,1].set_xlabel('DOS (states/eV atom)',fontsize=14,fontname='Arial')
-#axs[2,1].xaxis.set_label_coords(1.35, -0.)
 axs[0,1].axhline(0, linewidth=1, color='k', alpha=0.8, linestyle = '-')
-# bbox_to_anchor is basically to move the legends around--adjust it accordingly. 
 axs[0,1].legend(loc='upper right',fontsize="8",prop=font,frameon=False,facecolor='none',borderpad=0.2,labelspacing=0.3,handlelength=1,handletextpad=0.4,borderaxespad=0.2,bbox_to_anchor=(1,0.6))
 
-# axs[1,1].set_xlim([0,15])  
-# axs[1,1].set_ylim([-1.5,1.5]) 
-# axs[1,1].yaxis.set_visible(False)
-# #axs[1,1].set_xlabel('DOS(states/(eV)',fontsize=8,fontname='Ubuntu')
-# axs[1,1].xaxis.set_label_coords(1.3, -0.)
-# axs[1,1].axhline(0, linewidth=0.8, color='lime', alpha=0.8, linestyle = '--')
-# # bbox_to_anchor is basically to move the legends around--adjust it accordingly. 
-# axs[1,1].legend(loc='upper right',fontsize="6",bbox_to_anchor=(1.55,1))
+##############################################################################################################
 
-
+# Density plot for Al doping
 pcm20 = axs[3, 0].pcolormesh(k1Al,E1Al,densityAl.T, cmap='magma', shading='auto', 
                              norm=colors.LogNorm(vmin= np.min(densityAl.T)+0.01, vmax= np.max(densityAl.T)))
 axs[3,0].spines['top'].set_linewidth(1.5)
@@ -251,8 +227,8 @@ axs[3,0].axvline(1.2581, linewidth=1, color='w', alpha=0.8, linestyle = '-')
 axs[3,0].axvline(2.5162, linewidth=1, color='w', alpha=0.8, linestyle = '-')
 axs[3,0].axvline(3.8095, linewidth=1, color='w', alpha=0.8, linestyle = '-')
 
+# DOS for Al doping
 # here I've divided the DOS for the number of the respective atoms in the Supercell. 
-#dosFe/27,enFe
 axs[3,1].plot(dosAl/27,enAl-EfermiAl,linewidth = 1, color="k", label="Total") #marker=".", markersize=4, 
 axs[3,1].plot(PdedosAl/27,ePdAl-EfermiAl,linewidth = 1, color="darkgoldenrod", label="Pd")
 axs[3,1].plot(CoedosAl/26,eCoAl-EfermiAl,linewidth = 1, color="royalblue",label= "Co")
@@ -269,18 +245,13 @@ axs[3,1].set_xticks(ticks= [0,5,10],
 axs[3,1].tick_params(axis='x',direction='in',length=4,width=1.5,labelsize=14)
 axs[3,1].yaxis.set_visible(False)
 axs[3,1].set_xlabel('DOS (states/eV atom)',fontsize=14,fontname='Arial')
-#axs[2,1].set_xlabel('DOS(states/(eV)',fontsize=8,fontname='Ubuntu')
-#axs[2,1].xaxis.set_label_coords(1.35, -0.)
 axs[3,1].axhline(0, linewidth=1, color='k', alpha=0.8, linestyle = '-')
 # bbox_to_anchor is basically to move the legends around--adjust it accordingly. 
 axs[3,1].legend(loc='upper right',fontsize="8",prop=font,frameon=False,facecolor='none',borderpad=0.2,labelspacing=0.3,handlelength=1,handletextpad=0.4,borderaxespad=0.2,bbox_to_anchor=(1,0.6))
 
+#############################################################################################################
 
-
-
-#########################################################################################33
-
-
+# Density plot for Ag doping
 pcm30 = axs[1, 0].pcolormesh(k1Ag,E1Ag,densityAg.T, cmap='magma', shading='auto', 
                              norm=colors.LogNorm(vmin= np.min(densityAg.T)+0.01, vmax= np.max(densityAg.T)))
 axs[1,0].spines['top'].set_linewidth(1.5)
@@ -301,8 +272,8 @@ axs[1,0].axvline(1.2581, linewidth=1, color='w', alpha=0.8, linestyle = '-')
 axs[1,0].axvline(2.5162, linewidth=1, color='w', alpha=0.8, linestyle = '-')
 axs[1,0].axvline(3.8095, linewidth=1, color='w', alpha=0.8, linestyle = '-')
 
-# here I've divided the DOS for the number of the respective atoms in the Supercell. 
-#dosFe/27,enFe
+# DOS for Ag doping
+# here we've divided the DOS for the number of the respective atoms in the Supercell. 
 axs[1,1].plot(dosAg/27,enAg-EfermiAg,linewidth = 1, color="k", label="Total") #marker=".", markersize=4, 
 axs[1,1].plot(PdedosAg/26,ePdAg-EfermiAg,linewidth = 1, color="darkgoldenrod", label="Pd")
 axs[1,1].plot(CoedosAg/27,eCoAg-EfermiAg,linewidth = 1, color="royalblue",label= "Co")
@@ -319,14 +290,8 @@ axs[1,1].set_xticks(ticks= [0,5,10],
 axs[1,1].tick_params(axis='x',direction='in',length=4,width=1.5,labelsize=14)
 axs[1,1].yaxis.set_visible(False)
 axs[1,1].set_xlabel('DOS (states/eV atom)',fontsize=14,fontname='Arial')
-#axs[2,1].set_xlabel('DOS(states/(eV)',fontsize=8,fontname='Ubuntu')
-#axs[2,1].xaxis.set_label_coords(1.35, -0.)
 axs[1,1].axhline(0, linewidth=1, color='k', alpha=0.8, linestyle = '-')
-# bbox_to_anchor is basically to move the legends around--adjust it accordingly. 
 axs[1,1].legend(loc='upper right',fontsize="8",prop=font,frameon=False,facecolor='none',borderpad=0.2,labelspacing=0.3,handlelength=1,handletextpad=0.4,borderaxespad=0.2,bbox_to_anchor=(1,0.6))
-
-
-
 
 ###########################################################################################
 
