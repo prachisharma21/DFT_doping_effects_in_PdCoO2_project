@@ -124,18 +124,101 @@ font = font_manager.FontProperties(family='Arial',
 
 fig, axs = plt.subplots(4, 2,figsize=(10,8),gridspec_kw={'width_ratios':[1,0.3]} )
 
+###############################################################################################################
+
+# density plot for Pt doping
+pcm00 = axs[0, 0].pcolormesh(k1_w_Pt,E1_w_Pt,density_w_Pt.T, cmap='magma', shading='auto', 
+                             norm=colors.LogNorm(vmin= np.min(density_w_Pt.T)+0.01, vmax= np.max(density_w_Pt.T)))
+axs[0,0].spines['top'].set_linewidth(1.5)
+axs[0,0].spines['right'].set_linewidth(1.5)
+axs[0,0].spines['bottom'].set_linewidth(1.5)
+axs[0,0].spines['left'].set_linewidth(1.5)
+fig.colorbar(pcm00,ax = axs[0,0],extend="neither",location='left')#,shrink=0.80)
+axs[0,0].tick_params(axis='both',direction='in',colors='w',length=4,width=1.5)
+axs[0,0].set_xticks(ticks= [0, 1.2581, 2.5162, 3.8095, 4.3284], labels=['$\Gamma$','L', 'F','$\Gamma$','T'])
+axs[0,0].set_yticks(ticks= [-1,0,1],
+                    labels=['-1','0', '1'],color='k',fontsize=14,fontname='Arial')
+axs[0,0].set_ylabel('$\epsilon - \epsilon_F$ (eV)',fontsize=14,fontname='Arial')
+axs[0,0].yaxis.set_label_coords(-.05, .5)
+axs[0,0].axhline(0, linewidth=1, color='w', alpha=0.8, linestyle = '-')
+axs[0,0].axvline(1.2581, linewidth=1, color='w', alpha=0.8, linestyle = '-')
+axs[0,0].axvline(2.5162, linewidth=1, color='w', alpha=0.8, linestyle = '-')
+axs[0,0].axvline(3.8095, linewidth=1, color='w', alpha=0.8, linestyle = '-')
+
+# DOS for Pt doping
+axs[0,1].plot(dos_w_Pt/27,en_w_Pt-EfermiPt,linewidth = 1, color="k", label="Total")
+axs[0,1].plot(Pdedos_w_Pt/26,ePd_w_Pt-EfermiPt,linewidth = 1, color="darkgoldenrod", label="Pd")
+axs[0,1].plot(Coedos_w_Pt/27,eCo_w_Pt-EfermiPt,linewidth = 1, color="royalblue",label= "Co")
+axs[0,1].plot(Oedos_w_Pt/54,eO_w_Pt-EfermiPt,linewidth = 1, color="r", label = "O")
+axs[0,1].plot(dopedos_w_Pt,edop_w_Pt-EfermiPt,linewidth = 1, color="aqua", label = "Pt")
+axs[0,1].spines['top'].set_linewidth(1.5)
+axs[0,1].spines['right'].set_linewidth(1.5)
+axs[0,1].spines['bottom'].set_linewidth(1.5)
+axs[0,1].spines['left'].set_linewidth(1.5)
+axs[0,1].set_xlim([0,14])  
+axs[0,1].set_ylim([-1.5,1.5])
+axs[0,1].set_xticks(ticks= [0,5,10],
+                    labels=['0','5','10'],fontsize=14,fontname='Arial')
+axs[0,1].tick_params(axis='x',direction='in',length=4,width=1.5,labelsize=14)
+axs[0,1].yaxis.set_visible(False)
+axs[0,1].axhline(0, linewidth=1, color='k', alpha=0.8, linestyle = '-')
+axs[0,1].legend(loc='upper right',fontsize="8",prop=font,frameon=False,facecolor='none',borderpad=0.2,labelspacing=0.3,handlelength=1,handletextpad=0.4,borderaxespad=0.2,bbox_to_anchor=(1,0.6))
+
+#############################################################################################################
+
+# Density plot for Ag doping
+pcm10 = axs[1, 0].pcolormesh(k1_w_Ag,E1_w_Ag,density_w_Ag.T, cmap='magma', shading='auto', 
+                             norm=colors.LogNorm(vmin= np.min(density_w_Ag.T)+0.01, vmax= np.max(density_w_Ag.T)))
+axs[1,0].spines['top'].set_linewidth(1.5)
+axs[1,0].spines['right'].set_linewidth(1.5)
+axs[1,0].spines['bottom'].set_linewidth(1.5)
+axs[1,0].spines['left'].set_linewidth(1.5)
+fig.colorbar(pcm10,ax = axs[1,0],extend="neither",location='left')#,shrink=0.80)
+axs[1,0].tick_params(axis='both',direction='in',colors='w',length=4,width=1.5,labelsize=14)
+axs[1,0].set_xticks(ticks= [0, 1.2581, 2.5162, 3.8095, 4.3284],
+                    labels=['$\Gamma$','L', 'F','$\Gamma$','T'],color='k',fontsize=14,fontname='Arial')
+axs[1,0].set_yticks(ticks= [-1,0,1],
+                    labels=['-1','0', '1'],color='k',fontsize=14,fontname='Arial')
+axs[1,0].set_ylabel('$\epsilon - \epsilon_F$ (eV)',fontsize=14,fontname='Arial')
+axs[1,0].yaxis.set_label_coords(-.05, .5)
+axs[1,0].axhline(0, linewidth=1, color='w', alpha=0.8, linestyle = '-')
+axs[1,0].axvline(1.2581, linewidth=1, color='w', alpha=0.8, linestyle = '-')
+axs[1,0].axvline(2.5162, linewidth=1, color='w', alpha=0.8, linestyle = '-')
+axs[1,0].axvline(3.8095, linewidth=1, color='w', alpha=0.8, linestyle = '-')
+
+# DOS for Ag doping
+# here we've divided the DOS for the number of the respective atoms in the Supercell. 
+axs[1,1].plot(dos_w_Ag/27,en_w_Ag-EfermiAg,linewidth = 1, color="k", label="Total") #marker=".", markersize=4, 
+axs[1,1].plot(Pdedos_w_Ag/26,ePd_w_Ag-EfermiAg,linewidth = 1, color="darkgoldenrod", label="Pd")
+axs[1,1].plot(Coedos_w_Ag/27,eCo_w_Ag-EfermiAg,linewidth = 1, color="royalblue",label= "Co")
+axs[1,1].plot(Oedos_w_Ag/54,eO_w_Ag-EfermiAg,linewidth = 1, color="r", label = "O")
+axs[1,1].plot(dopedos_w_Ag,edop_w_Ag-EfermiAg,linewidth = 1, color="aqua", label = "Ag")
+axs[1,1].spines['top'].set_linewidth(1.5)
+axs[1,1].spines['right'].set_linewidth(1.5)
+axs[1,1].spines['bottom'].set_linewidth(1.5)
+axs[1,1].spines['left'].set_linewidth(1.5)
+axs[1,1].set_xlim([0,14])  
+axs[1,1].set_ylim([-1.5,1.5])
+axs[1,1].set_xticks(ticks= [0,5,10],
+                    labels=['0','5', '10'],fontsize=14,fontname='Arial')
+axs[1,1].tick_params(axis='x',direction='in',length=4,width=1.5,labelsize=14)
+axs[1,1].yaxis.set_visible(False)
+axs[1,1].set_xlabel('DOS (states/eV atom)',fontsize=14,fontname='Arial')
+axs[1,1].axhline(0, linewidth=1, color='k', alpha=0.8, linestyle = '-')
+axs[1,1].legend(loc='upper right',fontsize="8",prop=font,frameon=False,facecolor='none',borderpad=0.2,labelspacing=0.3,handlelength=1,handletextpad=0.4,borderaxespad=0.2,bbox_to_anchor=(1,0.6))
+
 ##########################################################################################################
 
 # density plot for Fe doping
-pcm00 =axs[2, 0].pcolormesh(k1_w_Fe,E1_w_Fe,density_w_Fe.T, cmap='magma', shading='auto', 
+pcm20 =axs[2, 0].pcolormesh(k1_w_Fe,E1_w_Fe,density_w_Fe.T, cmap='magma', shading='auto', 
                             norm=colors.LogNorm(vmin= np.min(density_w_Fe.T)+0.01, vmax= np.max(density_w_Fe.T)))
 axs[2,0].spines['top'].set_linewidth(1.5)
 axs[2,0].spines['right'].set_linewidth(1.5)
 axs[2,0].spines['bottom'].set_linewidth(1.5)
 axs[2,0].spines['left'].set_linewidth(1.5)
-fig.colorbar(pcm00,ax = axs[2,0],extend="neither",location='left')#,shrink=0.80)
+fig.colorbar(pcm20,ax = axs[2,0],extend="neither",location='left')#,shrink=0.80)
 axs[2,0].tick_params(axis='both',direction='in',colors='w',length=4,width=1.5)
-axs[2,0].set_xticks(ticks= [0, 1.2581, 2.5162, 3.8095, 4.3284], labels=[])
+axs[2,0].set_xticks(ticks= [0, 1.2581, 2.5162, 3.8095, 4.3284], labels=['$\Gamma$','L', 'F','$\Gamma$','T'])
 axs[2,0].set_yticks(ticks= [-1,0,1],
                     labels=['-1','0', '1'],color='k',fontsize=14,fontname='Arial')
 axs[2,0].set_ylabel('$\epsilon - \epsilon_F$ (eV)',fontsize=14,fontname='Arial')
@@ -165,56 +248,16 @@ axs[2,1].axhline(0, linewidth=1, color='k', alpha=0.8, linestyle = '-')
 # bbox_to_anchor is basically to move the legends around.
 axs[2,1].legend(loc='upper right',fontsize="8",prop=font,frameon=False,facecolor='none',borderpad=0.2,labelspacing=0.3,handlelength=1,handletextpad=0.4,borderaxespad=0.2,bbox_to_anchor=(1,0.6))
 
-###############################################################################################################
-
-# density plot for Pt doping
-pcm10 = axs[0, 0].pcolormesh(k1_w_Pt,E1_w_Pt,density_w_Pt.T, cmap='magma', shading='auto', 
-                             norm=colors.LogNorm(vmin= np.min(density_w_Pt.T)+0.01, vmax= np.max(density_w_Pt.T)))
-axs[0,0].spines['top'].set_linewidth(1.5)
-axs[0,0].spines['right'].set_linewidth(1.5)
-axs[0,0].spines['bottom'].set_linewidth(1.5)
-axs[0,0].spines['left'].set_linewidth(1.5)
-fig.colorbar(pcm10,ax = axs[0,0],extend="neither",location='left')#,shrink=0.80)
-axs[0,0].tick_params(axis='both',direction='in',colors='w',length=4,width=1.5)
-axs[0,0].set_xticks(ticks= [0, 1.2581, 2.5162, 3.8095, 4.3284], labels=[])
-axs[0,0].set_yticks(ticks= [-1,0,1],
-                    labels=['-1','0', '1'],color='k',fontsize=14,fontname='Arial')
-axs[0,0].set_ylabel('$\epsilon - \epsilon_F$ (eV)',fontsize=14,fontname='Arial')
-axs[0,0].yaxis.set_label_coords(-.05, .5)
-axs[0,0].axhline(0, linewidth=1, color='w', alpha=0.8, linestyle = '-')
-axs[0,0].axvline(1.2581, linewidth=1, color='w', alpha=0.8, linestyle = '-')
-axs[0,0].axvline(2.5162, linewidth=1, color='w', alpha=0.8, linestyle = '-')
-axs[0,0].axvline(3.8095, linewidth=1, color='w', alpha=0.8, linestyle = '-')
-
-# DOS for Pt doping
-axs[0,1].plot(dos_w_Pt/27,en_w_Pt-EfermiPt,linewidth = 1, color="k", label="Total")
-axs[0,1].plot(Pdedos_w_Pt/26,ePd_w_Pt-EfermiPt,linewidth = 1, color="darkgoldenrod", label="Pd")
-axs[0,1].plot(Coedos_w_Pt/27,eCo_w_Pt-EfermiPt,linewidth = 1, color="royalblue",label= "Co")
-axs[0,1].plot(Oedos_w_Pt/54,eO_w_Pt-EfermiPt,linewidth = 1, color="r", label = "O")
-axs[0,1].plot(dopedos_w_Pt,edop_w_Pt-EfermiPt,linewidth = 1, color="aqua", label = "Pt")
-axs[0,1].spines['top'].set_linewidth(1.5)
-axs[0,1].spines['right'].set_linewidth(1.5)
-axs[0,1].spines['bottom'].set_linewidth(1.5)
-axs[0,1].spines['left'].set_linewidth(1.5)
-axs[0,1].set_xlim([0,14])  
-axs[0,1].set_ylim([-1.5,1.5])
-axs[0,1].set_xticks(ticks= [0,5,10],
-                    labels=['0','5','10'],fontsize=14,fontname='Arial')
-axs[0,1].tick_params(axis='x',direction='in',length=4,width=1.5,labelsize=14)
-axs[0,1].yaxis.set_visible(False)
-axs[0,1].axhline(0, linewidth=1, color='k', alpha=0.8, linestyle = '-')
-axs[0,1].legend(loc='upper right',fontsize="8",prop=font,frameon=False,facecolor='none',borderpad=0.2,labelspacing=0.3,handlelength=1,handletextpad=0.4,borderaxespad=0.2,bbox_to_anchor=(1,0.6))
-
 ##############################################################################################################
 
 # Density plot for Al doping
-pcm20 = axs[3, 0].pcolormesh(k1_w_Al,E1_w_Al,density_w_Al.T, cmap='magma', shading='auto', 
+pcm30 = axs[3, 0].pcolormesh(k1_w_Al,E1_w_Al,density_w_Al.T, cmap='magma', shading='auto', 
                              norm=colors.LogNorm(vmin= np.min(density_w_Al.T)+0.01, vmax= np.max(density_w_Al.T)))
 axs[3,0].spines['top'].set_linewidth(1.5)
 axs[3,0].spines['right'].set_linewidth(1.5)
 axs[3,0].spines['bottom'].set_linewidth(1.5)
 axs[3,0].spines['left'].set_linewidth(1.5)
-fig.colorbar(pcm20,ax = axs[3,0],extend="neither",location='left')#,shrink=0.80)
+fig.colorbar(pcm30,ax = axs[3,0],extend="neither",location='left')#,shrink=0.80)
 axs[3,0].tick_params(axis='both',direction='in',colors='w',length=4,width=1.5,labelsize=14)
 axs[3,0].set_xticks(ticks= [0, 1.2581, 2.5162, 3.8095, 4.3284],
                     labels=['$\Gamma$','L', 'F','$\Gamma$','T'],color='k',fontsize=14,fontname='Arial')
@@ -248,50 +291,6 @@ axs[3,1].set_xlabel('DOS (states/eV atom)',fontsize=14,fontname='Arial')
 axs[3,1].axhline(0, linewidth=1, color='k', alpha=0.8, linestyle = '-')
 # bbox_to_anchor is basically to move the legends around--adjust it accordingly. 
 axs[3,1].legend(loc='upper right',fontsize="8",prop=font,frameon=False,facecolor='none',borderpad=0.2,labelspacing=0.3,handlelength=1,handletextpad=0.4,borderaxespad=0.2,bbox_to_anchor=(1,0.6))
-
-#############################################################################################################
-
-# Density plot for Ag doping
-pcm30 = axs[1, 0].pcolormesh(k1_w_Ag,E1_w_Ag,density_w_Ag.T, cmap='magma', shading='auto', 
-                             norm=colors.LogNorm(vmin= np.min(density_w_Ag.T)+0.01, vmax= np.max(density_w_Ag.T)))
-axs[1,0].spines['top'].set_linewidth(1.5)
-axs[1,0].spines['right'].set_linewidth(1.5)
-axs[1,0].spines['bottom'].set_linewidth(1.5)
-axs[1,0].spines['left'].set_linewidth(1.5)
-fig.colorbar(pcm30,ax = axs[1,0],extend="neither",location='left')#,shrink=0.80)
-axs[1,0].tick_params(axis='both',direction='in',colors='w',length=4,width=1.5,labelsize=14)
-axs[1,0].set_xticks(ticks= [0, 1.2581, 2.5162, 3.8095, 4.3284],
-
-                    labels=['$\Gamma$','L', 'F','$\Gamma$','T'],color='k',fontsize=14,fontname='Arial')
-axs[1,0].set_yticks(ticks= [-1,0,1],
-                    labels=['-1','0', '1'],color='k',fontsize=14,fontname='Arial')
-axs[1,0].set_ylabel('$\epsilon - \epsilon_F$ (eV)',fontsize=14,fontname='Arial')
-axs[1,0].yaxis.set_label_coords(-.05, .5)
-axs[1,0].axhline(0, linewidth=1, color='w', alpha=0.8, linestyle = '-')
-axs[1,0].axvline(1.2581, linewidth=1, color='w', alpha=0.8, linestyle = '-')
-axs[1,0].axvline(2.5162, linewidth=1, color='w', alpha=0.8, linestyle = '-')
-axs[1,0].axvline(3.8095, linewidth=1, color='w', alpha=0.8, linestyle = '-')
-
-# DOS for Ag doping
-# here we've divided the DOS for the number of the respective atoms in the Supercell. 
-axs[1,1].plot(dos_w_Ag/27,en_w_Ag-EfermiAg,linewidth = 1, color="k", label="Total") #marker=".", markersize=4, 
-axs[1,1].plot(Pdedos_w_Ag/26,ePd_w_Ag-EfermiAg,linewidth = 1, color="darkgoldenrod", label="Pd")
-axs[1,1].plot(Coedos_w_Ag/27,eCo_w_Ag-EfermiAg,linewidth = 1, color="royalblue",label= "Co")
-axs[1,1].plot(Oedos_w_Ag/54,eO_w_Ag-EfermiAg,linewidth = 1, color="r", label = "O")
-axs[1,1].plot(dopedos_w_Ag,edop_w_Ag-EfermiAg,linewidth = 1, color="aqua", label = "Ag")
-axs[1,1].spines['top'].set_linewidth(1.5)
-axs[1,1].spines['right'].set_linewidth(1.5)
-axs[1,1].spines['bottom'].set_linewidth(1.5)
-axs[1,1].spines['left'].set_linewidth(1.5)
-axs[1,1].set_xlim([0,14])  
-axs[1,1].set_ylim([-1.5,1.5])
-axs[1,1].set_xticks(ticks= [0,5,10],
-                    labels=['0','5', '10'],fontsize=14,fontname='Arial')
-axs[1,1].tick_params(axis='x',direction='in',length=4,width=1.5,labelsize=14)
-axs[1,1].yaxis.set_visible(False)
-axs[1,1].set_xlabel('DOS (states/eV atom)',fontsize=14,fontname='Arial')
-axs[1,1].axhline(0, linewidth=1, color='k', alpha=0.8, linestyle = '-')
-axs[1,1].legend(loc='upper right',fontsize="8",prop=font,frameon=False,facecolor='none',borderpad=0.2,labelspacing=0.3,handlelength=1,handletextpad=0.4,borderaxespad=0.2,bbox_to_anchor=(1,0.6))
 
 #######################################################################################################
 
